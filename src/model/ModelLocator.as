@@ -69,8 +69,6 @@ package model
 		[ResourceBundle("general")]
 		
 		private static var _instance:ModelLocator = new ModelLocator();
-		private static var dataSortFieldForBGReadings:SortField;
-		private static var dataSortForBGReadings:Sort;
 
 		public static var image_calibrate_active:Image;
 		public static var image_add:Image;
@@ -146,13 +144,7 @@ package model
 			
 			//bgreadings arraycollection
 			_bgReadings = new ArrayCollection();
-			dataSortFieldForBGReadings = new SortField();
-			dataSortFieldForBGReadings.name = "timestamp";
-			dataSortFieldForBGReadings.numeric = true;
-			dataSortFieldForBGReadings.descending = false;//ie ascending = from small to large
-			dataSortForBGReadings = new Sort();
-			dataSortForBGReadings.fields=[dataSortFieldForBGReadings];
-			_bgReadings.sort = dataSortForBGReadings;
+			_bgReadings.sort = BgReading.dataSortForBGReadings;
 			Database.instance.addEventListener(DatabaseEvent.DATABASE_INIT_FINISHED_EVENT,getBgReadingsFromDatabase);
 						
 			function getBgReadingsFromDatabase():void {
